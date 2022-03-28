@@ -45,7 +45,7 @@
                                 <div class="button">C</div>
                             </div>
                             <div>
-                                <button type="submit" class="submit-btn">Submit</button>
+                                <button onclick="verifyPin()" type="submit" class="submit-btn">Submit</button>
                                 <p class="action-left">3 try left</p>
                             </div>
                         </div>
@@ -53,8 +53,8 @@
                 </div>
             </div>
             <div class="notify-section">
-                <p class="notify">❌ Pin Didn't Match, Please try again</p>
-                <p class="notify">✅ Pin Matched... Secret door is opening for you</p>
+                <p id="notify-fail" class="notify">❌ Pin Didn't Match, Please try again</p>
+                <p id="notify-success" class="notify">✅ Pin Matched... Secret door is opening for you</p>
             </div>
         </div>
         <script>
@@ -92,7 +92,27 @@
                     const newNumber = previousNumber + number;
                     calcInput.value = newNumber;
                 }
-            })
+            });
+
+            function verifyPin() {
+                // console.log('going to verify');
+                const pin = document.getElementById('display-pin').value;
+                const typedNumbers = document.getElementById('typed-numbers').value;
+                
+                const failError = document.getElementById('notify-fail');
+                const successMessage = document.getElementById('notify-success');
+
+                if (pin == typedNumbers) {
+                    // console.log('matched. YAY');
+                    successMessage.style.display = 'block';
+                    failError.style.display = 'none';
+                }
+                else {
+                    // console.log('opps');
+                    failError.style.display = 'block';
+                    successMessage.style.display = 'none';
+                }
+            }
 
         </script>
         <script src="js/app.js"></script>
